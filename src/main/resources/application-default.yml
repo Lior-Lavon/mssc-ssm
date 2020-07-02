@@ -1,0 +1,17 @@
+# default configuration, active when no other profile setup
+spring:
+  datasource:
+    platform: h2
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    initialization-mode: embedded
+  jpa:
+    show-sql: false # open sql queries output to log
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true

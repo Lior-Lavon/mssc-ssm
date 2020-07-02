@@ -1,0 +1,13 @@
+#Database configuration for MySql Dev
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/[DB_NAME}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: user
+    password: password
+    platform: mysql
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database: mysql
+    show-sql: false
