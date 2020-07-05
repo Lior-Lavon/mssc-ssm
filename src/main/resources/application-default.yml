@@ -8,7 +8,7 @@ spring:
     password:
     initialization-mode: embedded
   jpa:
-    show-sql: false # open sql queries output to log
+    show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
   h2:
     console:
