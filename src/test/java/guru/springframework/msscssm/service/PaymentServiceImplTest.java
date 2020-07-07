@@ -6,6 +6,7 @@ import guru.springframework.msscssm.domain.PaymentState;
 import guru.springframework.msscssm.repository.PaymentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -52,10 +53,30 @@ class PaymentServiceImplTest {
         // get the pre authorize payment from the DB
         Payment preAuthPayment = paymentRepository.getOne(savedPayment.getId());
 
-        System.out.println("Should be PRE_AUTH !");
+        System.out.println("Should be PRE_AUTH or PRE_AUTH_ERROR !");
         System.out.println(preAuthPayment.getState());
 
         System.out.println(preAuthPayment);
+    }
+
+    @Transactional
+    @RepeatedTest(10)
+    @Test
+    void auth(){
+
+        Payment savedPayment = paymentService.newPayment(payment);
+        // change state to PreAuth
+        StateMachine<PaymentState, PaymentEvent> sm = paymentService.preAuth(savedPayment.getId());
+
+        System.out.println("Should be PRE_AUTH !");
+        System.out.println(savedPayment.getState());
+
+        // auth the payment and save the new payment
+        StateMachine<PaymentState, PaymentEvent> authSM = paymentService.auth(savedPayment.getId());
+
+
+        System.out.println("Should be AUTH or AUTH_ERROR !");
+        System.out.println(authSM.getState().getId());
 
     }
 }

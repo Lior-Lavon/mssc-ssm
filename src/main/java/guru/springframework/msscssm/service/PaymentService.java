@@ -13,11 +13,6 @@ public interface PaymentService {
     // Do Pre Auth
     StateMachine<PaymentState, PaymentEvent> preAuth(Long paymentId);
 
-    // Do Authorize Approved
-    StateMachine<PaymentState, PaymentEvent> authorizePayment(Long paymentId);
-
-    // Do Decline Auth
-    StateMachine<PaymentState, PaymentEvent> declineAuth(Long paymentId);
-
+    StateMachine<PaymentState, PaymentEvent> auth(Long paymentId);
 
 }

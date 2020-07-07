@@ -30,7 +30,7 @@ public class PaymentStateChangeInterceptor extends StateMachineInterceptorAdapte
                                StateMachine<PaymentState, PaymentEvent> stateMachine,
                                StateMachine<PaymentState, PaymentEvent> rootStateMachine) {
 
-        // befor estate change , If a message is present then get the paymentId from the header.
+        // before estate change , If a message is present then get the paymentId from the header.
         Optional.ofNullable(message)
                 .ifPresent(msg -> {
                     Optional.ofNullable(Long.class.cast(msg.getHeaders().getOrDefault(PaymentServiceImpl.PAYMENT_ID_HEADER, -1L)))
